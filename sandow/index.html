@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/style.css" rel="stylesheet">
+</head>
+
+<style>
+	fieldset {
+		display: flex;
+		flex-direction: column;
+		margin: auto;
+		max-width: 800px;
+	}
+
+	.field {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px;
+	}
+
+	input[type=number] {
+		font-weight: bold;
+	}
+</style>
+
+<body>
+
+	<fieldset id="config">
+		<legend>Configuration</legend>
+		<div class="field">
+			<label for="weight">Dumbbells weight (lbs):</label>
+			<input type="number" name="weight" min="1" max="15" value="1" onchange="updateConfig()">
+		</div>
+		<div class="field">
+			<label for="day">Day (1-15):</label>
+			<input type="number" name="day" min="1" max="40" value="1" onchange="updateConfig()">
+		</div>
+		<div class="field">
+			<label>Exercise:</label>
+			<span name="ex" style="font-size: 3rem">0/0</span>
+		</div>
+		<div class="field">
+			<label>Repetitions left:</label>
+			<span id="counter" style="font-size: 3rem">0</span>
+		</div>
+		<div class="field">
+			<button type="button" style="width: 100%" onclick="restart()">
+				Start/Restart
+			</button>
+		</div>
+	</fieldset>
+
+	<div id="images"></div>
+
+	<script src="./main.js"></script>
+</body>
+
+</html>
