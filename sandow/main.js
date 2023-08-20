@@ -2,7 +2,7 @@ const ex = [
 	{
 		id: 1,
 		img: ["./img/1-1.png", "./img/1-2.png"],
-		reps_min: 2,
+		reps_min: 50,
 		reps_max: 120,
 		reps_inc: 5,
 		duration_ms: 2000
@@ -109,28 +109,40 @@ const ex = [
 
 const config = document.querySelector("#config");
 const exercise = document.getElementsByName("ex")[0];
+const prev = document.getElementsByName("prev")[0];
+const next = document.getElementsByName("next")[0];
 const images = document.querySelector("#images");
 const counter = document.querySelector("#counter");
 
-let cur_idx = 0;
+window.idx = 0;
 let interval;
 
 function navigate(idx, start=true) {
+	clearInterval(interval);
 	if (0 > idx || idx >= ex.length)
 		return;
-	cur_idx = idx;
-	exercise.innerText = ex[cur_idx].id + "/" + ex[ex.length-1].id;
+	window.idx = idx;
+	exercise.innerText = ex[idx].id + "/" + ex[ex.length-1].id;
+	images.innerHTML = "";
+	ex[idx].img.forEach(src => {
+		const img = document.createElement("img");
+		img.src = src;
+		images.appendChild(img);
+	});
+	prev.disabled = idx == 0;
+	next.disabled = idx == ex.length-1;
 	start && restart();
 }
 
 function restart() {
+	clearInterval(interval);
 	count(
 		["*3*", "*2*", "*1*", "GO"],
 		1000,
 		() => count(
-			[...Array(ex[cur_idx].reps_min + 1).keys()].reverse(),
-			ex[cur_idx].duration_ms,
-			() => navigate(++cur_idx)
+			[...Array(ex[window.idx].reps_min + 1).keys()].reverse(),
+			ex[window.idx].duration_ms,
+			() => navigate(++window.idx)
 		)
 	);
 }
@@ -140,8 +152,8 @@ function count(values, ms, cb) {
 	let idx = 1;
 	const func = () => {
 		if (idx >= values.length) {
-			cb && cb();
 			clearInterval(interval);
+			cb && cb();
 			return;
 		}
 		counter.innerHTML = values[idx];
