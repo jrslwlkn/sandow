@@ -228,3 +228,4 @@ document.addEventListener("keydown", e => {
 restoreFromLocalStorage();
 navigate(window.idx, false);
 
+// TODO: in the last exercise on the 15th day update the weight by 2 lbs and prompt the user
