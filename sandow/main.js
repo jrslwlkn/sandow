@@ -107,7 +107,8 @@ const ex = [
 	}
 ]
 
-const config = document.querySelector("#config");
+const weight = document.getElementsByName("weight")[0];
+const day = document.getElementsByName("day")[0];
 const exercise = document.getElementsByName("ex")[0];
 const prev = document.getElementsByName("prev")[0];
 const next = document.getElementsByName("next")[0];
@@ -124,6 +125,7 @@ function navigate(idx) {
 	if (0 > idx || idx >= ex.length)
 		return;
 	window.idx = idx;
+	updateConfig();
 	counter.innerText = ex[idx].reps_min;
 	exercise.innerText = ex[idx].id + "/" + ex[ex.length - 1].id;
 	images.innerHTML = "";
@@ -178,6 +180,25 @@ function count(values, ms, cb) {
 	interval = setInterval(func, ms);
 }
 
+function restoreFromLocalStorage() {
+	let values = localStorage.getItem("sandow");
+	if (!values)
+		return;
+	values = JSON.parse(values);
+	weight.innerText = values.weight || "1";
+	day.innerText = values.day || "1";
+	window.idx = Number.parseInt(values.idx) || 0;
+}
+
+function updateConfig() {
+	const payload = {
+		weight: weight.value,
+		day: day.value,
+		idx: window.idx,
+	};
+	localStorage.setItem("sandow", JSON.stringify(payload));
+}
+
 document.addEventListener("keydown", e => {
 	if (e.key == " " || e.keyCode == "Space") {
 		e.preventDefault();
@@ -194,5 +215,6 @@ document.addEventListener("keydown", e => {
 	}
 });
 
-navigate(0, false);
+restoreFromLocalStorage();
+navigate(window.idx, false);
 
