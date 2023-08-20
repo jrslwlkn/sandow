@@ -126,7 +126,7 @@ function navigate(idx) {
 		return;
 	window.idx = idx;
 	updateConfig();
-	counter.innerText = ex[idx].reps_min;
+	counter.innerText = getReps();
 	exercise.innerText = ex[idx].id + "/" + ex[ex.length - 1].id;
 	images.innerHTML = "";
 	ex[idx].img.forEach(src => {
@@ -139,6 +139,10 @@ function navigate(idx) {
 	counter.style.color = paused ? "red" : "green";
 }
 
+function getReps() {
+	return Math.floor(ex[idx].reps_min + ex[idx].reps_inc * (Number.parseInt(day.value) - 1));
+}
+
 function restart() {
 	clearInterval(interval);
 	paused = false;
@@ -147,7 +151,7 @@ function restart() {
 		["*3*", "*2*", "*1*", "GO"],
 		1000,
 		() => count(
-			[...Array(ex[window.idx].reps_min + 1).keys()].reverse(),
+			[...Array(getReps() + 1).keys()].reverse(),
 			ex[window.idx].duration_ms,
 			() => navigate(++window.idx)
 		)
@@ -191,6 +195,9 @@ function restoreFromLocalStorage() {
 }
 
 function updateConfig() {
+	if (paused) {
+		counter.innerText = getReps();
+	}
 	const payload = {
 		weight: weight.value,
 		day: day.value,
