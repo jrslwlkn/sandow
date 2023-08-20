@@ -118,12 +118,14 @@ const counter = document.querySelector("#counter");
 window.idx = 0;
 let interval;
 let paused = true;
-let first_resume = true;
+let running = false;
 
 function navigate(idx) {
 	clearInterval(interval);
 	if (0 > idx || idx >= ex.length)
 		return;
+	paused = true;
+	running = false;
 	window.idx = idx;
 	updateConfig();
 	counter.innerText = getReps();
@@ -159,9 +161,8 @@ function restart() {
 }
 
 function togglePause() {
-	if (first_resume) {
+	if (!running) {
 		restart();
-		first_resume = false;
 		return;
 	}
 	paused = !paused;
@@ -173,6 +174,7 @@ function count(values, ms, cb) {
 	let idx = 1;
 	const func = () => {
 		if (paused) return;
+		running = true;
 		if (idx >= values.length) {
 			clearInterval(interval);
 			cb && cb();
@@ -182,6 +184,7 @@ function count(values, ms, cb) {
 		idx++;
 	}
 	interval = setInterval(func, ms);
+	running = false;
 }
 
 function restoreFromLocalStorage() {
