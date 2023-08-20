@@ -116,13 +116,16 @@ const counter = document.querySelector("#counter");
 
 window.idx = 0;
 let interval;
+let paused = true;
+let first_resume = true;
 
-function navigate(idx, start=true) {
+function navigate(idx) {
 	clearInterval(interval);
 	if (0 > idx || idx >= ex.length)
 		return;
 	window.idx = idx;
-	exercise.innerText = ex[idx].id + "/" + ex[ex.length-1].id;
+	counter.innerText = ex[idx].reps_min;
+	exercise.innerText = ex[idx].id + "/" + ex[ex.length - 1].id;
 	images.innerHTML = "";
 	ex[idx].img.forEach(src => {
 		const img = document.createElement("img");
@@ -130,12 +133,14 @@ function navigate(idx, start=true) {
 		images.appendChild(img);
 	});
 	prev.disabled = idx == 0;
-	next.disabled = idx == ex.length-1;
-	start && restart();
+	next.disabled = idx == ex.length - 1;
+	counter.style.color = paused ? "red" : "green";
 }
 
 function restart() {
 	clearInterval(interval);
+	paused = false;
+	counter.style.color = paused ? "red" : "green";
 	count(
 		["*3*", "*2*", "*1*", "GO"],
 		1000,
@@ -147,10 +152,21 @@ function restart() {
 	);
 }
 
+function togglePause() {
+	if (first_resume) {
+		restart();
+		first_resume = false;
+		return;
+	}
+	paused = !paused;
+	counter.style.color = paused ? "red" : "green";
+}
+
 function count(values, ms, cb) {
 	counter.innerHTML = values[0];
 	let idx = 1;
 	const func = () => {
+		if (paused) return;
 		if (idx >= values.length) {
 			clearInterval(interval);
 			cb && cb();
@@ -162,4 +178,21 @@ function count(values, ms, cb) {
 	interval = setInterval(func, ms);
 }
 
+document.addEventListener("keydown", e => {
+	if (e.key == " " || e.keyCode == "Space") {
+		e.preventDefault();
+		togglePause();
+	} else if (e.keyCode == "37") {
+		e.preventDefault();
+		navigate(--window.idx);
+	} else if (e.keyCode == "39") {
+		e.preventDefault();
+		navigate(++window.idx);
+	} else if (e.keyCode == "13") {
+		e.preventDefault();
+		restart();
+	}
+});
+
 navigate(0, false);
+

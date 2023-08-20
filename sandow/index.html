@@ -13,6 +13,7 @@
 		margin: auto;
 		max-width: 800px;
 		padding: 20px;
+		font-family: 'Trebuchet MS', 'Helvetica', sans-serif;
 	}
 
 	fieldset {
@@ -58,11 +59,14 @@
 		</div>
 		<div class="field">
 			<label>Repetitions left:</label>
-			<span id="counter" style="font-size: 3rem">0</span>
+			<span id="counter" style="font-size: 3rem; font-weight: bold;">0</span>
 		</div>
 		<div class="field">
-			<button type="button" style="width: 100%" onclick="restart()">
+			<button type="button" class="nav" onclick="restart()">
 				Start/Restart
+			</button>
+			<button type="button" class="nav" onclick="togglePause()">
+				Pause/Resume
 			</button>
 		</div>
 	</fieldset>
