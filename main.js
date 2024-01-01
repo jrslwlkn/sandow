@@ -105,7 +105,7 @@ const ex = [
 		reps_inc: 0.5,
 		duration_ms: 2000
 	}
-]
+];
 
 const weight = document.getElementsByName("weight")[0];
 const day = document.getElementsByName("day")[0];
@@ -192,8 +192,8 @@ function restoreFromLocalStorage() {
 	if (!values)
 		return;
 	values = JSON.parse(values);
-	weight.innerText = values.weight || "1";
-	day.innerText = values.day || "1";
+	weight.value = values.weight || "1";
+	day.value = values.day || "1";
 	window.idx = Number.parseInt(values.idx) || 0;
 }
 
@@ -229,3 +229,4 @@ restoreFromLocalStorage();
 navigate(window.idx, false);
 
 // TODO: in the last exercise on the 15th day update the weight by 2 lbs and prompt the user
+
