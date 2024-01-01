@@ -1,6 +1,6 @@
 # Sandow Dumbbell System Fitness App
 
-Web-based tracker of progress and a calculator of reps on a given day.
+Web-based tracker of progress and a calculator of reps on a given day. [Live version is available](https://jrslwlkn.github.io/sandow).
 
 ## Usage
 
