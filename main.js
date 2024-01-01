@@ -113,6 +113,7 @@ const exercise = document.getElementsByName("ex")[0];
 const prev = document.getElementsByName("prev")[0];
 const next = document.getElementsByName("next")[0];
 const images = document.querySelector("#images");
+const links = document.querySelector("#links");
 const counter = document.querySelector("#counter");
 
 window.idx = 0;
@@ -197,6 +198,17 @@ function restoreFromLocalStorage() {
 	window.idx = Number.parseInt(values.idx) || 0;
 }
 
+function createLinks() {
+	ex.forEach((e, idx) => {
+		const link = document.createElement("a");
+		link.onclick = () => navigate(idx);
+		link.href = "";
+		link.innerText = e.id;
+		link.style = "margin: 10px; font-weight: bold";
+		links.appendChild(link);
+	});
+}
+
 function updateConfig() {
 	if (paused) {
 		counter.innerText = getReps();
@@ -226,7 +238,8 @@ document.addEventListener("keydown", e => {
 });
 
 restoreFromLocalStorage();
-navigate(window.idx, false);
+createLinks();
+navigate(window.idx);
 
 // TODO: in the last exercise on the 15th day update the weight by 2 lbs and prompt the user
 
