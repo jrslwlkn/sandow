@@ -162,7 +162,7 @@ function navigate(idx) {
 }
 
 function getReps() {
-	return Math.floor(ex[idx].reps_min + ex[idx].reps_inc * (Number.parseInt(day.value) - 1));
+	return Math.floor(ex[idx].reps_min + ex[idx].reps_inc * (Math.min(Number.parseInt(day.value), 15) - 1));
 }
 
 function restart() {
@@ -240,6 +240,10 @@ function updateConfig() {
 	localStorage.setItem("sandow", JSON.stringify(payload));
 }
 
+function onDayChange() {
+	day.style.background = day.value > 15 ? "orange" : "initial";
+}
+
 document.addEventListener("keydown", e => {
 	if (e.key == " " || e.keyCode == "Space") {
 		e.preventDefault();
@@ -259,6 +263,4 @@ document.addEventListener("keydown", e => {
 restoreFromLocalStorage();
 createLinks();
 navigate(window.idx);
-
-// TODO: in the last exercise on the 15th day update the weight by 2 lbs and prompt the user
 
