@@ -75,10 +75,10 @@ const ex = [
 	{
 		id: "11-12",
 		img: ["./img/11-1.png", "./img/11-2a.png", "./img/11-2b.png", "./img/12-2.png"],
-		reps_min: 20,
+		reps_min: 10,
 		reps_inc: 0.5,
 		duration_ms: 2000,
-		desc: "Exercise 11: Place the dumb-bells on the floor, where they should lie lengthwise along the outer side of each foot, the centre of the bar on a line with the toes. Seize them and rise to the posi- tion of attention, the head and body erect, the knees unbent. Turn half round on the heels to the left, the toes being at an angle of 60 degrees; the body, which should turn on the hips, ought, as much as possible, to keep the front position. At the same time, bring the left forearm upwards to the waist, at right angles with the body; take a good step forward with the right foot, and lunge out forcibly with the left arm in the same direction, as if striking a hard blow, and recover quickly. Bring back the advanced leg with the alternate recover. Repeat the movement until the muscles are well exercised, the right arm remaining tense by the side. In the return movement, bring the elbow well back, and press the chest well forward. The muscles brought in to play in this exercise are the anterior deltoid, the biceps, the triceps, the serratus magnus, and the pectoralis major. When the body is turned on the hip, the lunging movement is beneficial to the abdominal muscles and assists circulation in that region.<br> Exercise 12: This is the same movement reversed; bringing into play the right arm and left foot instead of the left arm and right foot. The half-turn will consequently be to the right, and the left foot be advanced, to maintain the balance of the body. In these movements circulation and respiration are materially benefited. The breath should be inhaled as the arms are drawn back, and exhaled when thrust forward. Thisand the previous exercise, it will be noted, vary from those which precede them, in this respect, that the pulling-up muscles have hitherto been exercised, while the stretching-out ones come now into play."
+		desc: "Exercise 11: Place the dumb-bells on the floor, where they should lie lengthwise along the outer side of each foot, the centre of the bar on a line with the toes. Seize them and rise to the position of attention, the head and body erect, the knees unbent. Turn half round on the heels to the left, the toes being at an angle of 60 degrees; the body, which should turn on the hips, ought, as much as possible, to keep the front position. At the same time, bring the left forearm upwards to the waist, at right angles with the body; take a good step forward with the right foot, and lunge out forcibly with the left arm in the same direction, as if striking a hard blow, and recover quickly. Bring back the advanced leg with the alternate recover. Repeat the movement until the muscles are well exercised, the right arm remaining tense by the side. In the return movement, bring the elbow well back, and press the chest well forward. The muscles brought in to play in this exercise are the anterior deltoid, the biceps, the triceps, the serratus magnus, and the pectoralis major. When the body is turned on the hip, the lunging movement is beneficial to the abdominal muscles and assists circulation in that region.<br> Exercise 12: This is the same movement reversed; bringing into play the right arm and left foot instead of the left arm and right foot. The half-turn will consequently be to the right, and the left foot be advanced, to maintain the balance of the body. In these movements circulation and respiration are materially benefited. The breath should be inhaled as the arms are drawn back, and exhaled when thrust forward. Thisand the previous exercise, it will be noted, vary from those which precede them, in this respect, that the pulling-up muscles have hitherto been exercised, while the stretching-out ones come now into play."
 	},
 	{
 		id: 13,
@@ -98,7 +98,7 @@ const ex = [
 	},
 	{
 		id: 15,
-		img: ["./img/15-1.png"],
+		img: ["./img/15-1.png", "./img/15-2a.png", "./img/15-2b.png", "./img/15-2c.png"],
 		reps_min: 3,
 		reps_inc: 0.5,
 		duration_ms: 2000,
