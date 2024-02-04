@@ -123,6 +123,7 @@ const ex = [
 ];
 
 const weight = document.getElementsByName("weight")[0];
+const daysPerIncrement = document.getElementsByName("inc")[0];
 const day = document.getElementsByName("day")[0];
 const exercise = document.getElementsByName("ex")[0];
 const prev = document.getElementsByName("prev")[0];
@@ -162,7 +163,8 @@ function navigate(idx) {
 }
 
 function getReps() {
-	return Math.floor(ex[idx].reps_min + ex[idx].reps_inc * (Math.min(Number.parseInt(day.value), 15) - 1));
+	let days = Math.min(15, Math.ceil(day.value / daysPerIncrement.value)) - 1;
+	return Math.floor(ex[idx].reps_min + ex[idx].reps_inc * days);
 }
 
 function restart() {
@@ -213,6 +215,7 @@ function restoreFromLocalStorage() {
 		return;
 	values = JSON.parse(values);
 	weight.value = values.weight || "1";
+	daysPerIncrement.value = values.inc || "1";
 	day.value = values.day || "1";
 	window.idx = Number.parseInt(values.idx) || 0;
 }
@@ -235,13 +238,14 @@ function updateConfig() {
 	const payload = {
 		weight: weight.value,
 		day: day.value,
+		inc: daysPerIncrement.value,
 		idx: window.idx,
 	};
 	localStorage.setItem("sandow", JSON.stringify(payload));
 }
 
 function onDayChange() {
-	day.style.background = day.value > 15 ? "orange" : "initial";
+	day.style.background = day.value / daysPerIncrement.value > 15 ? "orange" : "initial";
 }
 
 document.addEventListener("keydown", e => {
